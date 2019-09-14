@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Cool Popup Quicklaunch
+Comment=Windows like quicklaunch
+
+Type=Service
+Icon=org.kde.plasma.quicklaunch
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-KDE-PluginInfo-Author=
+X-KDE-PluginInfo-Email=piotr4@gmail.com
+X-KDE-PluginInfo-Name=risu.win.quicklaunch
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Application Launchers
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL-3.0+
