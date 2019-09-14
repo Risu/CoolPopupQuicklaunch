@@ -16,7 +16,7 @@ MenuItem {
     
     contentItem: Text {
             text: menuItem.text
-            color: menuItem.highlighted ? "#000000" : "red"          
+            color: menuItem.highlighted ? "red" : "#000000"          
         }
 
     PlasmaCore.IconItem {
@@ -45,7 +45,6 @@ MenuItem {
                      if(!found) kRun.openUrl(filepath);
                      menuItem.menu.dismiss();
                      root.popup.visible=false;
-                    
                  }
             }
         }
