@@ -16,7 +16,7 @@ MenuItem {
     
     contentItem: Text {
             text: menuItem.text
-            color: menuItem.highlighted ? "red" : "#000000"          
+            color: menuItem.highlighted ? "blue" : "#000000"          
         }
 
     PlasmaCore.IconItem {
