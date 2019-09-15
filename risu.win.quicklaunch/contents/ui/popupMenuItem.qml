@@ -27,6 +27,8 @@ MenuItem {
         source : "unkonwn"
     }
     
+    arrow: Item { }
+    
     background: MouseArea {
             anchors.fill: parent
             hoverEnabled: true
