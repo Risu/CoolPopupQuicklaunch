@@ -15,17 +15,18 @@ PlasmaCore.Dialog {
     type: PlasmaCore.Dialog.Dock
     flags: Qt.WindowStaysOnTopHint
     backgroundHints: "NoBackground"
+    x: (plasmoid.location == PlasmaCore.Types.RightEdge) ? (Screen.desktopAvailableWidth + plasmoid.width) : 0
     y: (plasmoid.location == PlasmaCore.Types.BottomEdge) ? Screen.desktopAvailableHeight : 0
     color: "transparent"
     
     Rectangle {
         width: {
-            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.rigtEdge) return plasmoid.width;
+            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.RightEdge) return (plasmoid.width + 5);
             return Screen.desktopAvailableWidth;
         }
         height: {
-            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.rigtEdge) return Screen.desktopAvailableHeight;
-            return plasmoid.height;
+            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.RightEdge) return Screen.desktopAvailableHeight;
+            return (plasmoid.height + 5);
         }
         color: "transparent"
         
