@@ -12,11 +12,14 @@
     <entry name="maxNested" type="int">
       <default>5</default>
     </entry>
-        <entry name="foldersFirst" type="bool">
+    <entry name="foldersFirst" type="bool">
       <default>false</default>
     </entry>
-        <entry name="minMenuWidth" type="int">
+    <entry name="minMenuWidth" type="int">
       <default>110</default>
+    </entry>
+    <entry name="forceRefresh" type="bool">
+      <default>false</default>
     </entry>
   </group>
 

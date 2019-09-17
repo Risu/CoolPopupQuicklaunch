@@ -45,8 +45,9 @@ MenuItem {
                          }
                      }
                      if(!found) kRun.openUrl(filepath);
-                     menuItem.menu.dismiss();
-                     root.popup.visible=false;
+                     root.taskClick.visible = false;
+                     root.popup.width = 0;
+                     root.popup.height = 0;
                  }
             }
         }

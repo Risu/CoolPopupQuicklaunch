@@ -18,7 +18,7 @@ Item
         id: layout
         
         Label {
-            text: "Coming soon... Check for the updates on widget website (https://store.kde.org/)."
+            text: "Coming soon... Check for the updates on widget website (https://store.kde.org/p/1324748/)."
         }
         
     }

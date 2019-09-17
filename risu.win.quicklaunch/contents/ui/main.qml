@@ -23,7 +23,6 @@ Item {
     readonly property bool foldersFirst: plasmoid.configuration.foldersFirst
     readonly property int menuWidth: plasmoid.configuration.minMenuWidth
     property string quicklaunchFolder: plasmoid.configuration.quicklaunchFolder
-    property bool forceRefresh: false
     property alias popup: popup
 
     Plasmoid.icon: {
@@ -47,31 +46,31 @@ Item {
         type: PlasmaCore.Dialog.PopupMenu
         backgroundHints: "NoBackground"
         flags: Qt.WindowStaysOnTopHint
-        //flags:  Qt.FramelessWindowHint
-        hideOnWindowDeactivate: true
         location: plasmoid.location
-        visualParent: plasmoid
         color: "transparent"
         mainItem: Rectangle {
             id: screenbuffer
-            width: Screen.desktopAvailableWidth
-            height: Screen.desktopAvailableHeight
+            width: 1
+            height: 1
             color: "transparent"
             property var popupComponent : Qt.createComponent("popup.qml")
             property var modelComponent : Qt.createComponent("folderModel.qml")
             property var folderModel : screenbuffer.modelComponent.createObject(screenbuffer.popupComponent, {"folder": quicklaunchFolder})
-            property var contextMenu 
+            property var contextMenu
             MouseArea {
                 anchors.fill: parent
-                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onClicked: {
-                        if(screenbuffer.contextMenu != null) screenbuffer.contextMenu.dismiss();
-                        root.popup.visible = false
+                    root.taskClick.visible = false;
+                    root.popup.width = 0;
+                    root.popup.height = 0;
                 }
             }
         }
     }
 
+    property var clickComponent : Qt.createComponent("taskClick.qml")
+    property var taskClick 
+    
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.compactRepresentation: PlasmaCore.IconItem {
             source: Plasmoid.icon
@@ -85,27 +84,34 @@ Item {
                             folderDialog.open()
                         } else
                         {
-                            if(!root.popup.visible)
+                            if(root.popup.width <= 1)
                             {
-                                if(forceRefresh) {
+                                if(plasmoid.configuration.forceRefresh) {
                                     if(screenbuffer.contextMenu != null) screenbuffer.contextMenu.dismiss();
                                     if(screenbuffer.contextMenu != null) screenbuffer.contextMenu.destroy();
                                     for (var i = (favoritesModel.count-1); i >= 0; i--) favoritesModel.removeFavorite(i);
                                     screenbuffer.contextMenu = null;
-                                    forceRefresh = false;
+                                    plasmoid.configuration.forceRefresh = false;
                                 }
                                 root.popup.visible = true;
+                                root.taskClick.visible = true;
+                                root.popup.width = Screen.desktopAvailableWidth;
+                                root.popup.height = Screen.desktopAvailableHeight;
                                 if(screenbuffer.contextMenu  == null) screenbuffer.contextMenu = screenbuffer.popupComponent.createObject(screenbuffer, {"folderModel": screenbuffer.folderModel})
                                 screenbuffer.contextMenu.popup()
                             } else
                             {
-                                if(screenbuffer.contextMenu != null) screenbuffer.contextMenu.dismiss();
-                                root.popup.visible = false;
+                                root.taskClick.visible = false;
+                                root.popup.width = 0;
+                                root.popup.height = 0;
                             }
                         }
                     }
 
                 }
+            }
+            Component.onCompleted: {
+                if(taskClick==null) taskClick = clickComponent.createObject(plasmoid, {})
             }
     }
 
@@ -119,7 +125,7 @@ Item {
             quicklaunchFolder = folderDialog.fileUrl;
             plasmoid.configuration.quicklaunchFolder = folderDialog.fileUrl;
             screenbuffer.folderModel.folder = folderDialog.fileUrl;
-            forceRefresh = true;
+            plasmoid.configuration.forceRefresh = true;
         }
         onRejected: {
         }
@@ -128,7 +134,7 @@ Item {
 
     function action_refresh() {
          if(screenbuffer.contextMenu != null) screenbuffer.contextMenu.dismiss();
-         forceRefresh = true;
+         plasmoid.configuration.forceRefresh = true;
     }
     
     function action_changeFolder() {
