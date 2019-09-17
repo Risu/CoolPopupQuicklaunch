@@ -158,6 +158,6 @@ Item {
         plasmoid.setActionSeparator("extra")
     }
     Plasmoid.toolTipSubText: {
-        "Don't forget to check for the new updated version."
+        "Website with updates: https://store.kde.org/p/1324748/"
     }
 }

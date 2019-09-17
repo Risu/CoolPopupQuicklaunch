@@ -19,9 +19,14 @@ Menu {
     property int nesting : 0;
     property var itemComponent : Qt.createComponent("popupMenuItem.qml");
 
-    Rectangle
-    {
+    Rectangle {
         id: framebuffer
+    }
+    
+    TextMetrics {
+        id: textMetrics
+        font.family: contextMenu.font.family
+        text: ""
     }
     
     Instantiator {
@@ -43,7 +48,8 @@ Menu {
                                 contextMenu, {
                                     "folder": "file://" + object.file_path
                                 })
-                    var mWidth = 80 + (object.file_name.length*10);
+                    textMetrics.text = object.file_name;
+                    var mWidth = 65 + textMetrics.advanceWidth;
                     if(mWidth > width) width = mWidth;
                     var innerMenu = popupComponent.createObject(contextMenu, {
                                                                     "title": object.file_name,
@@ -63,7 +69,8 @@ Menu {
                     var modelIndex = favoritesModel.index(0,0);
                     if (favoritesModel.data(modelIndex, Qt.UserRole + 3) == object.file_path) menu_icon = favoritesModel.data(modelIndex, Qt.DecorationRole);
                     var sName = object.file_name.split(".")[0];
-                    var mWidth = 80 + (sName.length*10);
+                    textMetrics.text = sName;
+                    var mWidth = 65 + textMetrics.advanceWidth;
                     if(mWidth > width) width = mWidth;
                     var menuItem = itemComponent.createObject(framebuffer, {
                                                                     "text": sName,
