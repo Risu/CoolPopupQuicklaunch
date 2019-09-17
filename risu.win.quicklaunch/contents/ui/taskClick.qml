@@ -12,7 +12,7 @@ PlasmaCore.Dialog {
     type: PlasmaCore.Dialog.Dock
     flags: Qt.WindowStaysOnTopHint
     backgroundHints: "NoBackground"
-    y: Screen.desktopAvailableHeight
+    y: (plasmoid.location == PlasmaCore.Types.BottomEdge) ? Screen.desktopAvailableHeight : 0
     color: "transparent"
     
     Rectangle {
@@ -23,6 +23,7 @@ PlasmaCore.Dialog {
         MouseArea {
             anchors.fill: parent
             visible: true
+            acceptedButtons: Qt.LeftButton | Qt.RightButton 
             onClicked: {
                 taskClick.visible = false;
                 root.popup.width = 0;

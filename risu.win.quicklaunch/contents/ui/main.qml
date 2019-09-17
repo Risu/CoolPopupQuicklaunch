@@ -26,7 +26,7 @@ Item {
     property alias popup: popup
 
     Plasmoid.icon: {
-        source: "arrow-up"
+        source: (plasmoid.location == PlasmaCore.Types.BottomEdge) ? "arrow-up" : "arrow-down"
     }
 
     Kicker.RootModel {
@@ -59,6 +59,7 @@ Item {
             property var contextMenu
             MouseArea {
                 anchors.fill: parent
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
                 onClicked: {
                     root.taskClick.visible = false;
                     root.popup.width = 0;
@@ -77,7 +78,7 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
-                acceptedButtons: Qt.LeftButton 
+                acceptedButtons: Qt.LeftButton
                 onClicked: {
                     if (mouse.button === Qt.LeftButton) {
                         if(quicklaunchFolder == "") {
@@ -107,7 +108,6 @@ Item {
                             }
                         }
                     }
-
                 }
             }
             Component.onCompleted: {
