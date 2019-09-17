@@ -1,3 +1,6 @@
+//contact: piotr4@gmail.com
+//GPLv3
+
 import QtQuick 2.6
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
@@ -16,8 +19,14 @@ PlasmaCore.Dialog {
     color: "transparent"
     
     Rectangle {
-        width: Screen.desktopAvailableWidth
-        height: plasmoid.height
+        width: {
+            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.rigtEdge) return plasmoid.width;
+            return Screen.desktopAvailableWidth;
+        }
+        height: {
+            if(plasmoid.location == PlasmaCore.Types.LeftEdge || plasmoid.location == PlasmaCore.Types.rigtEdge) return Screen.desktopAvailableHeight;
+            return plasmoid.height;
+        }
         color: "transparent"
         
         MouseArea {

@@ -21,6 +21,12 @@
     <entry name="forceRefresh" type="bool">
       <default>false</default>
     </entry>
+    <entry name="iconType" type="int">
+      <default>0</default>
+    </entry>
+    <entry name="slimIcon" type="bool">
+      <default>true</default>
+    </entry>
   </group>
 
 </kcfg>

@@ -26,7 +26,17 @@ Item {
     property alias popup: popup
 
     Plasmoid.icon: {
-        source: (plasmoid.location == PlasmaCore.Types.BottomEdge) ? "arrow-up" : "arrow-down"
+        source: {
+            if(plasmoid.configuration.slimIcon) plasmoid.Layout.maximumWidth = 20;
+            if (plasmoid.configuration.iconType == 0)
+            {
+                if(plasmoid.location == PlasmaCore.Types.LeftEdge) return "arrow-right";
+                if(plasmoid.location == PlasmaCore.Types.RightEdge) return "arrow-left";
+                return (plasmoid.location == PlasmaCore.Types.BottomEdge) ? "arrow-up" : "arrow-down";
+            }
+            if (plasmoid.configuration.iconType == 1) return Qt.resolvedUrl("../icons/qwhite.png");
+            if (plasmoid.configuration.iconType == 2) return Qt.resolvedUrl("../icons/qblack.png");
+        }
     }
 
     Kicker.RootModel {
