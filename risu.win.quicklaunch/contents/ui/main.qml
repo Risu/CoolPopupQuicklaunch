@@ -74,6 +74,7 @@ Item {
                     root.taskClick.visible = false;
                     root.popup.width = 0;
                     root.popup.height = 0;
+                    root.popup.outputOnly = true;
                 }
             }
         }
@@ -105,6 +106,7 @@ Item {
                                     plasmoid.configuration.forceRefresh = false;
                                 }
                                 root.popup.visible = true;
+                                root.popup.outputOnly = false;
                                 root.taskClick.visible = true;
                                 root.popup.width = Screen.desktopAvailableWidth;
                                 root.popup.height = Screen.desktopAvailableHeight;
@@ -115,6 +117,7 @@ Item {
                                 root.taskClick.visible = false;
                                 root.popup.width = 0;
                                 root.popup.height = 0;
+                                root.popup.outputOnly = true;
                             }
                         }
                     }

@@ -13,6 +13,7 @@ MenuItem {
     property var mIndex : -1
     property alias source  : menuItemIcon.source
     leftPadding: 45
+    bottomPadding: 12
     
     contentItem: Text {
             text: menuItem.text
@@ -33,7 +34,7 @@ MenuItem {
             anchors.fill: parent
             hoverEnabled: true
             onPressed:{
-                 if (mouse.button === Qt.LeftButton) {
+                 if (mouse.button === Qt.LeftButton && root.popup.width > 1) {
                      var found = false;
                      for (var i = 0; i < favoritesModel.count; i++) {
                          var modelIndex = favoritesModel.index(i, 0);
@@ -48,6 +49,7 @@ MenuItem {
                      root.taskClick.visible = false;
                      root.popup.width = 0;
                      root.popup.height = 0;
+                     root.popup.outputOnly = true;
                  }
             }
         }

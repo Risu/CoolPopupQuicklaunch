@@ -38,6 +38,7 @@ PlasmaCore.Dialog {
                 taskClick.visible = false;
                 root.popup.width = 0;
                 root.popup.height = 0;
+                root.popup.outputOnly = true;
             }
             
         }
