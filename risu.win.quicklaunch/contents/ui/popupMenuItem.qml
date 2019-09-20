@@ -13,7 +13,7 @@ MenuItem {
     property var mIndex : -1
     property alias source  : menuItemIcon.source
     leftPadding: 45
-    bottomPadding: 12
+    bottomPadding: 10
     
     contentItem: Text {
             text: menuItem.text
