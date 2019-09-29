@@ -27,6 +27,12 @@
     <entry name="slimIcon" type="bool">
       <default>true</default>
     </entry>
+    <entry name="itemDefaultColor" type="string">
+      <default>#000000</default>
+    </entry>
+    <entry name="itemHighlightedColor" type="string">
+      <default>blue</default>
+    </entry>
   </group>
 
 </kcfg>

@@ -5,11 +5,15 @@ import QtQuick 2.6
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4 as Controls1
+import QtQuick.Dialogs 1.2
 
 Item
 {
     id: settings
     signal configurationChanged
+    property int currentEditedColor : 0
+    property alias rctItemDefault : rctItemDefault
+    property alias rctItemHighlighted : rctItemHighlighted
 
     function saveConfig() {
         
@@ -25,7 +29,10 @@ Item
         if(irbCWhite.checked) plasmoid.configuration.iconType = 1;
         if(irbCBlack.checked) plasmoid.configuration.iconType = 2;
 
-         plasmoid.configuration.slimIcon = slimIconConfig.checked;
+        plasmoid.configuration.slimIcon = slimIconConfig.checked;
+        
+        plasmoid.configuration.itemDefaultColor = rctItemDefault.color;
+        plasmoid.configuration.itemHighlightedColor = rctItemHighlighted.color;
 
     }
     
@@ -119,6 +126,68 @@ Item
 
             }
         }
+        
+        GroupBox { //"Item text colors:"
+            
+            title:  "Item text colours:"
+            font.underline: true
+            Layout.fillWidth: true
+            
+            ColumnLayout {   
+                
+                RowLayout { //"Default text colour:"
+                    
+                        spacing:  20
+                        Label {
+                            id: lb1
+                            text: "Default text colour:"
+                        } 
+                        
+                        MouseArea {
+                            width: 70
+                            height: lb1.height
+                            hoverEnabled: true
+
+                            onClicked: {currentEditedColor = 0; colDialog.color = rctItemDefault.color; colDialog.open() }
+
+                            Rectangle {
+                                id: rctItemDefault
+                                anchors.fill: parent
+                                color: plasmoid.configuration.itemDefaultColor
+                                border.width: 2
+                                border.color: parent.containsMouse ? theme.highlightColor : "black"
+                            }
+                        }
+                }
+                
+                RowLayout { //"Highlighted text colour:"
+            
+                        spacing:  20                    
+                        Label {
+                            id: lb2
+                            text: "Highlighted text colour:"
+                        } 
+                    
+                        MouseArea {
+                            width: 70
+                            height: lb2.height
+                            hoverEnabled: true
+
+                            onClicked: {currentEditedColor = 1; colDialog.color = rctItemHighlighted.color;  colDialog.open() }
+
+                            Rectangle {
+                                id: rctItemHighlighted
+                                anchors.fill: parent 
+                                color: plasmoid.configuration.itemHighlightedColor
+                                border.width: 2
+                                border.color: parent.containsMouse ? theme.highlightColor : "black"
+                            }
+                        }    
+                }
+                
+            }
+            
+        }
 
         RowLayout { //"Minimum width of the menu item:"
 
@@ -159,6 +228,22 @@ Item
         }
         
     }
-
+    
+    ColorDialog {
+		id: colDialog
+		visible: false
+		modality: Qt.WindowModal
+		title: "Choose a colour:"
+		showAlphaChannel: false
+		color: "white"
+        onAccepted: {
+            if(currentEditedColor == 0) {
+                rctItemDefault.color = colDialog.color;
+            }
+            if(currentEditedColor == 1) {
+                rctItemHighlighted.color = colDialog.color;
+            }                
+		}
+	}
     
 }

@@ -17,7 +17,7 @@ MenuItem {
     
     contentItem: Text {
             text: menuItem.text
-            color: menuItem.highlighted ? "blue" : "#000000"          
+            color: menuItem.highlighted ? plasmoid.configuration.itemHighlightedColor : plasmoid.configuration.itemDefaultColor          
         }
 
     PlasmaCore.IconItem {
